@@ -4,6 +4,7 @@ import axios from "axios";
 
 //Pegando as informações da API pelo GET
 const ListaDeUsuarios = () => {
+  const [_infos, _setInfos] = useState([]);
   const [infos, setInfos] = useState([]);
   useEffect(() => {
     axios
@@ -12,10 +13,11 @@ const ListaDeUsuarios = () => {
       })
       .then((resposta) => {
         setInfos(resposta.data);
-      });
+        _setInfos(resposta.data);
+      })
   }, []);
 
-  // Mock com lista de cartões para teste
+  // Mock com lista de cartõs para teste
   const cards = [
     // cartão válido
     {
@@ -30,6 +32,12 @@ const ListaDeUsuarios = () => {
       expiry_date: "01/20",
     },
   ];
+
+  const filter = (event) => {
+    const value = event.target.value;
+    const _new = _infos.filter((i) => i.id.toString().includes(value));
+    setInfos(_new);
+  };
 
   // Função para pegar a escolha do cartão do input select
   const escolhaDoCartao = (event) => {
@@ -75,11 +83,11 @@ const ListaDeUsuarios = () => {
 
   // Função para validar campo de valor para pagamento do usuário
   const valorInput = (event) => {
-    const value = event.target.value.replace(/\D/g, '')
+    const value = event.target.value.replace(/\D/g, "");
     const amount = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-      }).format(value / 100);
+      style: "currency",
+      currency: "BRL",
+    }).format(value / 100);
     setValorDinheiro(amount);
     setValidarCampo("none");
   };
@@ -87,6 +95,15 @@ const ListaDeUsuarios = () => {
   // Renderizando na tela as informações recebidas da API
   return (
     <section className="container">
+      <label htmlFor="search">Buscar usuário</label>
+      <input
+        className="field"
+        type="search"
+        name=""
+        id="search"
+        onChange={filter}
+        placeholder="Pesquise por: Nome, ID, Username"
+      />
       <div className="row">
         {infos.map((item) => (
           <div className="card" key={item.index}>
@@ -122,13 +139,13 @@ const ListaDeUsuarios = () => {
               Pagamento para <span>{pegarUsuario}</span>
             </p>
             <div className="modal-body">
-                <input
-                  className="field"
-                  thousandSeparator={true}
-                  value={valorDinheiro}
-                  onChange={valorInput}
-                  placeholder="R$ 0,00"
-                />
+              <input
+                className="field"
+                thousandSeparator={true}
+                value={valorDinheiro}
+                onChange={valorInput}
+                placeholder="R$ 0,00"
+              />
               <small className="field-error" style={{ display: validarCampo }}>
                 Campo obrigatório
               </small>
@@ -161,7 +178,7 @@ const ListaDeUsuarios = () => {
         <div className="modal" style={{ display: abrirPagou }}>
           <div className="modal-content">
             <div className="modal-header ">
-                <p>Recibo de pagamento</p>
+              <p>Recibo de pagamento</p>
             </div>
             <div className="modal-body">
               <p>
