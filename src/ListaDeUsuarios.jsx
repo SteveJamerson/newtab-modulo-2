@@ -35,8 +35,8 @@ const ListaDeUsuarios = () => {
 
   const filter = (event) => {
     const value = event.target.value;
-    const _new = _infos.filter(({id, name, username}) =>
-      Object.values({id, name, username}).join().includes(value)
+    const _new = _infos.filter(({ id, name, username }) =>
+      Object.values({ id, name, username }).join().includes(value)
     );
     setInfos(_new);
   };
@@ -62,7 +62,8 @@ const ListaDeUsuarios = () => {
   };
 
   // Função que abre o modal de recibo de pagamento
-  const modalPagou = () => {
+  const modalPagou = (e) => {
+    e.preventDefault();
     if (valorDinheiro === "") {
       setValidarCampo("flex");
     } else {
@@ -104,7 +105,7 @@ const ListaDeUsuarios = () => {
         name=""
         id="search"
         onChange={filter}
-        placeholder="Pesquise por: Nome, ID, Username"
+        placeholder="Pesquise por: Nome, ID e Username."
       />
       <div className="row">
         {infos.map((item) => (
@@ -137,42 +138,45 @@ const ListaDeUsuarios = () => {
         {/*--------------------------------Abrir Modal de pagamento----------------------------------*/}
         <div className="modal" style={{ display: abrirPagamento }}>
           <div className="modal-content">
-            <p className="modal-header">
-              Pagamento para <span>{pegarUsuario}</span>
-            </p>
-            <div className="modal-body">
-              <input
-                className="field"
-                thousandSeparator={true}
-                value={valorDinheiro}
-                onChange={valorInput}
-                placeholder="R$ 0,00"
-              />
-              <small className="field-error" style={{ display: validarCampo }}>
-                Campo obrigatório
-              </small>
-              <select
-                className="field"
-                value={valorCartao}
-                onChange={escolhaDoCartao}
-              >
-                <option value="1">
-                  Cartão com final {cards[0].card_number.substr(-4)}
-                </option>
-                <option value="2">
-                  Cartão com final {cards[1].card_number.substr(-4)}
-                </option>
-              </select>
-            </div>
-            <div className="modal-footer">
-              <button
-                onClick={() => {
-                  modalPagou();
-                }}
-              >
-                Pagar
-              </button>
-            </div>
+            <form onSubmit={modalPagou}>
+              <p className="modal-header">
+                Pagamento para <span>{pegarUsuario}</span>
+                <button class="close" onClick={()=>setAbrirPagamento("none")}>
+                  <i class="close-icon"></i>
+                  <i class="close-icon"></i>
+                </button>
+              </p>
+              <div className="modal-body">
+                <input
+                  className="field"
+                  thousandSeparator={true}
+                  value={valorDinheiro}
+                  onChange={valorInput}
+                  placeholder="R$ 0,00"
+                />
+                <small
+                  className="field-error"
+                  style={{ display: validarCampo }}
+                >
+                  Campo obrigatório
+                </small>
+                <select
+                  className="field"
+                  value={valorCartao}
+                  onChange={escolhaDoCartao}
+                >
+                  <option value="1">
+                    Cartão com final {cards[0].card_number.substr(-4)}
+                  </option>
+                  <option value="2">
+                    Cartão com final {cards[1].card_number.substr(-4)}
+                  </option>
+                </select>
+              </div>
+              <div className="modal-footer">
+                <button type="submit">Pagar</button>
+              </div>
+            </form>
           </div>
         </div>
 
