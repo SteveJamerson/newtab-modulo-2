@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/newtab-modulo-2/precache-manifest.8275dd0946e007009c3d38c100f2f7b8.js"
+  "/newtab-modulo-2/precache-manifest.ba927723b283fe8607192c36010927f7.js"
 );
 
 self.addEventListener('message', (event) => {
