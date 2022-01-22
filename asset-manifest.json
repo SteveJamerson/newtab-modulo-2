@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/newtab-modulo-2/static/css/main.528a3875.chunk.css",
+    "main.js": "/newtab-modulo-2/static/js/main.fd588dc3.chunk.js",
+    "main.js.map": "/newtab-modulo-2/static/js/main.fd588dc3.chunk.js.map",
+    "runtime-main.js": "/newtab-modulo-2/static/js/runtime-main.f57fd52d.js",
+    "runtime-main.js.map": "/newtab-modulo-2/static/js/runtime-main.f57fd52d.js.map",
+    "static/js/2.c7fc1d28.chunk.js": "/newtab-modulo-2/static/js/2.c7fc1d28.chunk.js",
+    "static/js/2.c7fc1d28.chunk.js.map": "/newtab-modulo-2/static/js/2.c7fc1d28.chunk.js.map",
+    "index.html": "/newtab-modulo-2/index.html",
+    "precache-manifest.74d0a0db6ad836a9327c564fdced881c.js": "/newtab-modulo-2/precache-manifest.74d0a0db6ad836a9327c564fdced881c.js",
+    "service-worker.js": "/newtab-modulo-2/service-worker.js",
+    "static/css/main.528a3875.chunk.css.map": "/newtab-modulo-2/static/css/main.528a3875.chunk.css.map",
+    "static/js/2.c7fc1d28.chunk.js.LICENSE.txt": "/newtab-modulo-2/static/js/2.c7fc1d28.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f57fd52d.js",
+    "static/js/2.c7fc1d28.chunk.js",
+    "static/css/main.528a3875.chunk.css",
+    "static/js/main.fd588dc3.chunk.js"
+  ]
+}
