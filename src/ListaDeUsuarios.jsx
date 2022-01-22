@@ -14,7 +14,7 @@ const ListaDeUsuarios = () => {
       .then((resposta) => {
         setInfos(resposta.data);
         _setInfos(resposta.data);
-      })
+      });
   }, []);
 
   // Mock com lista de cartõs para teste
@@ -35,7 +35,9 @@ const ListaDeUsuarios = () => {
 
   const filter = (event) => {
     const value = event.target.value;
-    const _new = _infos.filter((i) => i.id.toString().includes(value));
+    const _new = _infos.filter(({id, name, username}) =>
+      Object.values({id, name, username}).join().includes(value)
+    );
     setInfos(_new);
   };
 
