@@ -14,6 +14,7 @@ const ListaDeUsuarios = () => {
       .then((resposta) => {
         setInfos(resposta.data);
         _setInfos(resposta.data);
+        setLoading(false);
       });
   }, []);
 
@@ -54,6 +55,7 @@ const ListaDeUsuarios = () => {
   const [valorCartao, setValorCartao] = useState("1"); // Para pegar o cartão escolhido para pagamento
   const [valorDinheiro, setValorDinheiro] = useState(""); // Para pegar o valor de pagamento digitado
   const [validarCampo, setValidarCampo] = useState("none"); // Para validar campo de valor digitado
+  const [loading, setLoading] = useState(true);
 
   // Função para abrir o modal de pagamento do usuário
   const modalPagar = (name) => {
@@ -97,113 +99,129 @@ const ListaDeUsuarios = () => {
 
   // Renderizando na tela as informações recebidas da API
   return (
-    <section className="container">
-      <label htmlFor="search">Buscar usuário</label>
-      <input
-        className="field"
-        type="search"
-        name=""
-        id="search"
-        onChange={filter}
-        placeholder="Pesquise por: Nome, ID e Username."
-      />
-      <div className="row">
-        {infos.map((item) => (
-          <div className="card" key={item.index}>
-            <div className="card-body">
-              <img className="thumbnail" src={item.img} alt="Foto do usuário" />
-              <div className="infos">
-                <p className="title">{item.name}</p>
-                <ul className="description">
-                  <li>
-                    <b>ID:</b> {item.id}
-                  </li>
-                  <li>
-                    <b>Username:</b> {item.username}
-                  </li>
-                </ul>
-              </div>
-              <button
-                className="modal-pay"
-                onClick={() => {
-                  modalPagar(item.name);
-                }}
-              >
-                Pagar
-              </button>
-            </div>
-          </div>
-        ))}
-
-        {/*--------------------------------Abrir Modal de pagamento----------------------------------*/}
-        <div className="modal" style={{ display: abrirPagamento }}>
-          <div className="modal-content">
-            <form onSubmit={modalPagou}>
-              <p className="modal-header">
-                Pagamento para <span>{pegarUsuario}</span>
-                <button class="close" onClick={()=>setAbrirPagamento("none")}>
-                  <i class="close-icon"></i>
-                  <i class="close-icon"></i>
-                </button>
-              </p>
-              <div className="modal-body">
-                <input
-                  className="field"
-                  thousandSeparator={true}
-                  value={valorDinheiro}
-                  onChange={valorInput}
-                  placeholder="R$ 0,00"
-                />
-                <small
-                  className="field-error"
-                  style={{ display: validarCampo }}
-                >
-                  Campo obrigatório
-                </small>
-                <select
-                  className="field"
-                  value={valorCartao}
-                  onChange={escolhaDoCartao}
-                >
-                  <option value="1">
-                    Cartão com final {cards[0].card_number.substr(-4)}
-                  </option>
-                  <option value="2">
-                    Cartão com final {cards[1].card_number.substr(-4)}
-                  </option>
-                </select>
-              </div>
-              <div className="modal-footer">
-                <button type="submit">Pagar</button>
-              </div>
-            </form>
-          </div>
+    <>
+      {loading ? (
+        <div className="loading">
+          
         </div>
+      ) : (
+        <section className="container">
+          <label htmlFor="search">Buscar usuário</label>
+          <input
+            className="field"
+            type="search"
+            name=""
+            id="search"
+            onChange={filter}
+            placeholder="Pesquise por: Nome, ID e Username."
+          />
+          <div className="row">
+            {infos.map((item) => (
+              <div className="card" key={item.index}>
+                <div className="card-body">
+                  <img
+                    className="thumbnail"
+                    src={item.img}
+                    alt="Foto do usuário"
+                  />
+                  <div className="infos">
+                    <p className="title">{item.name}</p>
+                    <ul className="description">
+                      <li>
+                        <b>ID:</b> {item.id}
+                      </li>
+                      <li>
+                        <b>Username:</b> {item.username}
+                      </li>
+                    </ul>
+                  </div>
+                  <button
+                    className="modal-pay"
+                    onClick={() => {
+                      modalPagar(item.name);
+                    }}
+                  >
+                    Pagar
+                  </button>
+                </div>
+              </div>
+            ))}
 
-        {/*------------------------------Abrir Modal de recibo de pagamento--------------------------------*/}
-        <div className="modal" style={{ display: abrirPagou }}>
-          <div className="modal-content">
-            <div className="modal-header ">
-              <p>Recibo de pagamento</p>
+            {/*--------------------------------Abrir Modal de pagamento----------------------------------*/}
+            <div className="modal" style={{ display: abrirPagamento }}>
+              <div className="modal-content">
+                <form onSubmit={modalPagou}>
+                  <p className="modal-header">
+                    Pagamento para <span>{pegarUsuario}</span>
+                    <button
+                      class="close"
+                      onClick={() => setAbrirPagamento("none")}
+                    >
+                      <i class="close-icon"></i>
+                      <i class="close-icon"></i>
+                    </button>
+                  </p>
+                  <div className="modal-body">
+                    <input
+                      className="field"
+                      thousandSeparator={true}
+                      value={valorDinheiro}
+                      onChange={valorInput}
+                      placeholder="R$ 0,00"
+                    />
+                    <small
+                      className="field-error"
+                      style={{ display: validarCampo }}
+                    >
+                      Campo obrigatório
+                    </small>
+                    <select
+                      className="field"
+                      value={valorCartao}
+                      onChange={escolhaDoCartao}
+                    >
+                      <option value="1">
+                        Cartão com final {cards[0].card_number.substr(-4)}
+                      </option>
+                      <option value="2">
+                        Cartão com final {cards[1].card_number.substr(-4)}
+                      </option>
+                    </select>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="submit">Pagar</button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div className="modal-body">
-              <p>
-                O Pagamento <b>{abrirNaoRecebeu}</b> foi concluído com sucesso
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button
-                onClick={() => {
-                  fecharModal();
-                }}
-              >
-                Fechar
-              </button>
+
+            {/*------------------------------Abrir Modal de recibo de pagamento--------------------------------*/}
+            <div className="modal" style={{ display: abrirPagou }}>
+              <div className="modal-content">
+                <div className="modal-header ">
+                  <p>Recibo de pagamento</p>
+                </div>
+                <div className="modal-body">
+                  <p>
+                    O Pagamento <b>{abrirNaoRecebeu}</b> foi concluído com
+                    sucesso
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    onClick={() => {
+                      fecharModal();
+                    }}
+                  >
+                    Fechar
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 };
 
