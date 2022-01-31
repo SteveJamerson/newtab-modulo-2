@@ -157,12 +157,12 @@ const ListaDeUsuarios = () => {
                   <p className="modal-header">
                     Pagamento para <span>{pegarUsuario}</span>
                     <button
-                      class="close"
+                      className="close"
                       onClick={() => setAbrirPagamento("none")}
                       data-testid="modal-pay-close"
                     >
-                      <i class="close-icon"></i>
-                      <i class="close-icon"></i>
+                      <i className="close-icon"></i>
+                      <i className="close-icon"></i>
                     </button>
                   </p>
                   <div className="modal-body">

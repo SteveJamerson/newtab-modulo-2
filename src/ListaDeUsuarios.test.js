@@ -1,6 +1,6 @@
 import React from "react";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import ListaDeUsuarios, {} from "./ListaDeUsuarios";
+import ListaDeUsuarios from "./ListaDeUsuarios";
 
 import axios from "axios";
 
@@ -54,28 +54,30 @@ describe("Lista de usuarios", () => {
     expect(cards.length).toEqual(2)
   });
 
-  it("should open and close modal payment", async () => {
-    const open = screen.getByTestId("modal-pay-1")
-    fireEvent.click(open)
-    const close = screen.getByTestId("modal-pay-close")
-    fireEvent.click(close)
-  });
+  describe('should modal payment', () => {
+    it("open and close", async () => {
+      const open = screen.getByTestId("modal-pay-1")
+      fireEvent.click(open)
+      const close = screen.getByTestId("modal-pay-close")
+      fireEvent.click(close)
+    });
+  })
 
   describe('should payment', () => {
     beforeEach(async () => {
       const open = screen.getByTestId("modal-pay-1")
       fireEvent.click(open)
   
-      const select = await screen.getByTestId("modal-pay-card")
-      await fireEvent.click(select)
+      const select = screen.getByTestId("modal-pay-card")
+      fireEvent.click(select)
 
-      const value = await screen.getByTestId('modal-pay-value')
-      await fireEvent.change(value, { target: { value: '10000' } })
+      const value = screen.getByTestId('modal-pay-value')
+      fireEvent.change(value, { target: { value: '10000' } })
     })
 
     it("valid", async () => {
       const options = screen.getByTestId('modal-pay-card')
-      await fireEvent.change(options, { target: { value: '1' } })
+      fireEvent.change(options, { target: { value: '1' } })
       expect(options.value).toEqual('1')
   
       const submit = screen.getByTestId("modal-pay-submit")
