@@ -101,11 +101,11 @@ const ListaDeUsuarios = () => {
   return (
     <>
       {loading ? (
-        <div className="loading">
+        <div className="loading" data-testid="loading">
           
         </div>
       ) : (
-        <section className="container">
+        <section className="container" data-testid="container">
           <label htmlFor="search">Buscar usuário</label>
           <input
             className="field"
@@ -116,8 +116,8 @@ const ListaDeUsuarios = () => {
             placeholder="Pesquise por: Nome, ID e Username."
           />
           <div className="row">
-            {infos.map((item) => (
-              <div className="card" key={item.index}>
+            {infos?.map((item, index) => (
+              <div className="card" key={index} data-testid={`card-${index}`}>
                 <div className="card-body">
                   <img
                     className="thumbnail"
