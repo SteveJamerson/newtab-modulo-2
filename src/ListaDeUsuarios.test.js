@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ListaDeUsuarios, {} from "./ListaDeUsuarios";
 
 import axios from "axios";
@@ -19,35 +19,44 @@ const API = [
   },
 ];
 
-const _body = { data: API };
-let url = "";
-let body = [];
-
 jest.mock("axios", () => ({
-  get: jest.fn((_url, _body) => {
+  get: jest.fn((..._) => {
     return new Promise((resolve) => {
-      url = _url;
-      body = _body;
-      resolve(_body);
+      resolve(true);
     });
   }),
 }));
 
 describe("Lista de usuarios", () => {
+  beforeEach(async () => {
+    axios.get.mockResolvedValue({ data: API });
+    render(<ListaDeUsuarios />);
+    await screen.findByText('Buscar usuário');
+  })
 
   it("should loading", () => {
     render(<ListaDeUsuarios />);
-    const loading = screen.getByTestId("loading");
-    expect(loading).toBeTruthy();
-    expect(loading).toMatchSnapshot();
+    const test = screen.getByTestId("loading");
+    expect(test).toBeTruthy();
+    expect(test).toMatchSnapshot();
   });
 
-  it("test container", async () => { 
-    render(<ListaDeUsuarios />);
-    axios.get.mockResolvedValue({ _body });
-    await screen.findByText('Buscar usuário');
-    const container = screen.getByTestId("container");
-    expect(container).toBeTruthy();
-    expect(container).toMatchSnapshot();
+  it("should container", async () => { 
+    const test = screen.getByTestId("container");
+    expect(test).toBeTruthy();
+    expect(test).toMatchSnapshot();
+  });
+
+  it("should filter", async () => {
+    const filter = screen.getByTestId("filter")
+    fireEvent.change(filter, { target: { value: '10' } })
+  });
+
+  it("should open and close modal payment", async () => {
+    
+    const open = screen.getByTestId("modal-pay-1")
+    fireEvent.click(open)
+    const close = screen.getByTestId("modal-pay-close")
+    fireEvent.click(close)
   });
 });

@@ -6,6 +6,7 @@ import axios from "axios";
 const ListaDeUsuarios = () => {
   const [_infos, _setInfos] = useState([]);
   const [infos, setInfos] = useState([]);
+
   useEffect(() => {
     axios
       .get("https://www.mocky.io/v2/5d531c4f2e0000620081ddce", {
@@ -114,6 +115,7 @@ const ListaDeUsuarios = () => {
             id="search"
             onChange={filter}
             placeholder="Pesquise por: Nome, ID e Username."
+            data-testid="filter"
           />
           <div className="row">
             {infos?.map((item, index) => (
@@ -125,7 +127,7 @@ const ListaDeUsuarios = () => {
                     alt="Foto do usuário"
                   />
                   <div className="infos">
-                    <p className="title">{item.name}</p>
+                    <p className="title" data-testid={`title-${index}`}>{item.name}</p>
                     <ul className="description">
                       <li>
                         <b>ID:</b> {item.id}
@@ -136,6 +138,7 @@ const ListaDeUsuarios = () => {
                     </ul>
                   </div>
                   <button
+                    data-testid={`modal-pay-${index}`}
                     className="modal-pay"
                     onClick={() => {
                       modalPagar(item.name);
@@ -156,6 +159,7 @@ const ListaDeUsuarios = () => {
                     <button
                       class="close"
                       onClick={() => setAbrirPagamento("none")}
+                      data-testid="modal-pay-close"
                     >
                       <i class="close-icon"></i>
                       <i class="close-icon"></i>

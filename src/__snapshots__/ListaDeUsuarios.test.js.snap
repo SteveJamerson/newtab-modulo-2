@@ -1,13 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Lista de usuarios should loading 1`] = `
-<div
-  class="loading"
-  data-testid="loading"
-/>
-`;
-
-exports[`Lista de usuarios test container 1`] = `
+exports[`Lista de usuarios should container 1`] = `
 <section
   class="container"
   data-testid="container"
@@ -19,6 +12,7 @@ exports[`Lista de usuarios test container 1`] = `
   </label>
   <input
     class="field"
+    data-testid="filter"
     id="search"
     name=""
     placeholder="Pesquise por: Nome, ID e Username."
@@ -27,6 +21,102 @@ exports[`Lista de usuarios test container 1`] = `
   <div
     class="row"
   >
+    <div
+      class="card"
+      data-testid="card-0"
+    >
+      <div
+        class="card-body"
+      >
+        <img
+          alt="Foto do usuário"
+          class="thumbnail"
+          src="https://randomuser.me/api/portraits/men/9.jpg"
+        />
+        <div
+          class="infos"
+        >
+          <p
+            class="title"
+            data-testid="title-0"
+          >
+            Eduardo Santos
+          </p>
+          <ul
+            class="description"
+          >
+            <li>
+              <b>
+                ID:
+              </b>
+               
+              1001
+            </li>
+            <li>
+              <b>
+                Username:
+              </b>
+               
+              @eduardo.santos
+            </li>
+          </ul>
+        </div>
+        <button
+          class="modal-pay"
+          data-testid="modal-pay-0"
+        >
+          Pagar
+        </button>
+      </div>
+    </div>
+    <div
+      class="card"
+      data-testid="card-1"
+    >
+      <div
+        class="card-body"
+      >
+        <img
+          alt="Foto do usuário"
+          class="thumbnail"
+          src="https://randomuser.me/api/portraits/women/37.jpg"
+        />
+        <div
+          class="infos"
+        >
+          <p
+            class="title"
+            data-testid="title-1"
+          >
+            Marina Coelho
+          </p>
+          <ul
+            class="description"
+          >
+            <li>
+              <b>
+                ID:
+              </b>
+               
+              1002
+            </li>
+            <li>
+              <b>
+                Username:
+              </b>
+               
+              @marina.coelho
+            </li>
+          </ul>
+        </div>
+        <button
+          class="modal-pay"
+          data-testid="modal-pay-1"
+        >
+          Pagar
+        </button>
+      </div>
+    </div>
     <div
       class="modal"
       style="display: none;"
@@ -42,6 +132,7 @@ exports[`Lista de usuarios test container 1`] = `
             <span />
             <button
               class="close"
+              data-testid="modal-pay-close"
             >
               <i
                 class="close-icon"
@@ -126,4 +217,11 @@ exports[`Lista de usuarios test container 1`] = `
     </div>
   </div>
 </section>
+`;
+
+exports[`Lista de usuarios should loading 1`] = `
+<div
+  class="loading"
+  data-testid="loading"
+/>
 `;
