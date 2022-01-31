@@ -172,6 +172,7 @@ const ListaDeUsuarios = () => {
                       value={valorDinheiro}
                       onChange={valorInput}
                       placeholder="R$ 0,00"
+                      data-testid="modal-pay-value"
                     />
                     <small
                       className="field-error"
@@ -183,17 +184,19 @@ const ListaDeUsuarios = () => {
                       className="field"
                       value={valorCartao}
                       onChange={escolhaDoCartao}
+                      data-testid="modal-pay-card"
                     >
-                      <option value="1">
+                      <option value="1" data-testid="modal-pay-card-option">
                         Cartão com final {cards[0].card_number.substr(-4)}
                       </option>
-                      <option value="2">
+                      <option value="2" data-testid="modal-pay-card-option">
                         Cartão com final {cards[1].card_number.substr(-4)}
                       </option>
                     </select>
                   </div>
                   <div className="modal-footer">
-                    <button type="submit">Pagar</button>
+                    <button type="submit" 
+                      data-testid="modal-pay-submit">Pagar</button>
                   </div>
                 </form>
               </div>
@@ -206,13 +209,14 @@ const ListaDeUsuarios = () => {
                   <p>Recibo de pagamento</p>
                 </div>
                 <div className="modal-body">
-                  <p>
+                  <p data-testid={`payment ${abrirNaoRecebeu}`}>
                     O Pagamento <b>{abrirNaoRecebeu}</b> foi concluído com
                     sucesso
                   </p>
                 </div>
                 <div className="modal-footer">
                   <button
+                    data-testid="modal-receipt-close"
                     onClick={() => {
                       fecharModal();
                     }}
