@@ -19,8 +19,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
-    "test:cov": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false",
+    "test:cov": "react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --coverage",
+    "test:w": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b pages -d build"
